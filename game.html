@@ -5,6 +5,7 @@
   /*record amount of wins in baseball 116. no guess should be higher */
 
   while (guess != answer) {//Should keep prompting while there's no match
+    console.log(answer)
     if (guess < answer) { //guess is lower than answer
         guess = prompt("Too low, guess again...try a higher number!");
     }
@@ -13,17 +14,17 @@
     }
   }
   //guess and answer match
-  if (guess > 95) {
-    message = "You matched! First place for sure!";
+  if ((guess >= 60) && (guess <= 81)){
+    message = "You matched the predicted number of " + answer + ". So.. we're going to have another losing season";
   }
-  else if (60 <= guess >= 81){
-    message = "So.. we're going to have another losing season";
+  else if (guess > 95) {
+    message = "You matched the predicted number of " + answer + ". First place for sure!";
   }
   else if (guess < 60){
-    message = "You matched! so we'll be in last this year...";
+    message = "You matched the predicted number of " + answer + ". So we'll be in last this year...";
   }
   else {
-    message = "Sweet! you matched this super accurate predictor!"
+    message = "You matched the predicted number of " + answer +  ". Sweet! you matched this super accurate predictor!"
   }
    alert(message);
 
