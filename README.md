@@ -5,3 +5,5 @@ When the user matches the predictor's number it will give them a congratulatory 
 Number of guesses was kept track via a variable named 'counter'.
 
 5-12(Partner: Marcel) Fixed "if" statement to display message properly.
+
+Added a guess limit and informed user how many guesses they have left.
