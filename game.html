@@ -1,10 +1,10 @@
 <script type="text/javascript">
   var guess, answer, counter, message;
-    guess = prompt("Guess a number and match the predicted total number of wins the Mariners will achive this year.");
-    counter = 1;
-    answer = Math.floor(Math.random() * 162) + 1;
-    /*A baseball season is 162 games. No guess should be higher */
 
+  guess   = prompt("Guess a number and match the predicted total number of wins the Mariners will achive this year.");
+  counter = 1;
+  answer  = Math.floor(Math.random() * 162) + 1;
+  /*Generates random number between 1 - 162 to be set as answer*/
   while (guess != answer) {//Should keep prompting while there's no match
     if (guess < answer) { //guess is lower than answer
       guess = prompt("Too low, guess again...try a higher number!");
