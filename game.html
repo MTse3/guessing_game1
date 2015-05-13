@@ -1,31 +1,33 @@
 <script type="text/javascript">
   var guess, answer, message;
   guess = prompt("Guess a number and match the predicted total number of wins the Mariners will achive this year.");
-  answer = Math.floor(Math.random() * 116) + 1;
-  /*record amount of wins in baseball 116. no guess should be higher */
+  answer = Math.floor(Math.random() * 162) + 1;
+  /*A baseball season is 162 games. No guess should be higher */
 
   while (guess != answer) {//Should keep prompting while there's no match
-    console.log(answer)
     if (guess < answer) { //guess is lower than answer
-        guess = prompt("Too low, guess again...try a higher number!");
+      guess = prompt("Too low, guess again...try a higher number!");
     }
     else if (guess > answer) {// guess is higher than the answer
       guess = prompt("Too high, guess again...try a lower number");
     }
   }
   //guess and answer match
-  if ((guess >= 60) && (guess <= 81)){
+  if (guess > 116) {
+    message = "Wow! " + answer + ", that would be a record!";
+  }
+  else if (guess > 95) {//guess between 96-116
+    message = "Horray! You matched the predicted number of " + answer + ". They'll be in first place for sure!";
+  }
+  else if (guess > 80){//guess between 81-95
+    message = "Sweet! You matched this super accurate predictor with the total of " + answer +"!"
+  }
+  else if (guess > 60) {//guess between 61-79
     message = "You matched the predicted number of " + answer + ". So.. we're going to have another losing season";
   }
-  else if (guess > 95) {
-    message = "You matched the predicted number of " + answer + ". First place for sure!";
-  }
-  else if (guess < 60){
+  else {//guess 60 and below
     message = "You matched the predicted number of " + answer + ". So we'll be in last this year...";
   }
-  else {
-    message = "You matched the predicted number of " + answer +  ". Sweet! you matched this super accurate predictor!"
-  }
-   alert(message);
 
+  alert(message);
 </script>
