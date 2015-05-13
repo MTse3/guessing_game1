@@ -1,32 +1,35 @@
 <script type="text/javascript">
-  var guess, answer, message;
-  guess = prompt("Guess a number and match the predicted total number of wins the Mariners will achive this year.");
-  answer = Math.floor(Math.random() * 162) + 1;
-  /*A baseball season is 162 games. No guess should be higher */
+  var guess, answer, counter, message;
+    guess = prompt("Guess a number and match the predicted total number of wins the Mariners will achive this year.");
+    counter = 1;
+    answer = Math.floor(Math.random() * 162) + 1;
+    /*A baseball season is 162 games. No guess should be higher */
 
   while (guess != answer) {//Should keep prompting while there's no match
     if (guess < answer) { //guess is lower than answer
       guess = prompt("Too low, guess again...try a higher number!");
+      counter++;
     }
     else if (guess > answer) {// guess is higher than the answer
       guess = prompt("Too high, guess again...try a lower number");
+      counter++;
     }
   }
   //guess and answer match
   if (guess > 116) {
-    message = "Wow! " + answer + ", that would be a record!";
+    message = "Wow! " + answer + " wins would be a record! It took you " + counter + " tries.";
   }
   else if (guess > 95) {//guess between 96-116
-    message = "Horray! You matched the predicted number of " + answer + ". They'll be in first place for sure!";
+    message = "Horray! You matched the predicted number of " + answer + " in " + counter + " tries. They'll be in first place for sure!";
   }
   else if (guess > 80){//guess between 81-95
-    message = "Sweet! You matched this super accurate predictor with the total of " + answer +"!"
+    message = "Sweet! You matched this super accurate predictor with the total of " + answer + " in " + counter + " tries.";
   }
   else if (guess > 60) {//guess between 61-79
-    message = "You matched the predicted number of " + answer + ". So.. we're going to have another losing season";
+    message = "You matched the predicted number of " + answer + " in " + counter + " tries. So.. the M's are going to have another losing season.";
   }
   else {//guess 60 and below
-    message = "You matched the predicted number of " + answer + ". So we'll be in last this year...";
+    message = "You matched the predicted number of " + answer + " in " + counter + " tries. So, last place this year...";
   }
 
   alert(message);
