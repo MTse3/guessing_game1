@@ -1,51 +1,94 @@
-<script type="text/javascript">
-  (function () {
-    var game = {
-      guess: 0,
-      answer: Math.floor(Math.random() * 162) + 1,
-      /*Generates random number between 1 - 162 to be set as answer*/
-      counter: 1,
-      message: "",
-      limit: 10,
-      guessremaining: function() {
-        return this.limit - this.counter;
+<!doctype html>
+  <head>
+    <title> Seattle Mariners Win Predictor </title>
+  </head>
+  <body>
+    <h1>M's Match Game!</h1>
+      <!--for background image -->
+      <img src="http://images8.alphacoders.com/438/438626.jpg" alt="Mariners Logo with blue background">
+
+    <h2>Instructions</h2>
+      <figure>
+        <img src="http://mlb.mlb.com/images/2011/07/14/UeSQcgev.jpg" alt="2001 final regular season game with 116 wins in background" align="right">
+        <figcaption align="right">In 2001, the Mariners tied the MLB record with 116 wins.</figcaption>
+      </figure>
+      <p>This program generates a prediction for the number of wins the Seattle Mariners will have this year. Your job is to match the amount it generates.
+      </p>
+        <ol>
+          <li>Input the number of attempts you think it will take for you to match the predictor</li>
+          <li>Input your guess for the number of wins. It will inform you if you need to guess higher or lower</li>
+          <li>Continue guessing until correct or you run out of tries </li>
+        </ol>
+      <p>When you match the predictor's number it will give congratulatory message and tell you in how many attempts it took.
+      </p>
+    <h2>Other Information</h2>
+      <p><strong>High Scores</strong>
+      </p>
+      <a href="http://seattle.mariners.mlb.com/mlb/standings/" target="_blank">Current MLB standings</a>
+      <a href="">Reviews</a>
+      <p>Issues?:
+        <a href="mailto:michael.tse3@gmail.com">E-mail Mike</a>
+      </p>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {//displays pictures first, then runs game
+      var Player = function () {
+        this.initialize = function() {
+          this.prediction = Math.floor(Math.random() * 162) + 1;
+          /*Generates random number between 1 - 162 to be set as answer*/
+          this.limit = prompt("This game will ask you to match the predicted total number of wins the Mariners will achive this year. How many tries do you think it will take you to match?");
+          this.getGuess("Guess the total number of wins the Mariners will achive this year.");
+          this.used = 1;
+          this.result = "";
+        }
+        this.getGuess = function(message) {
+          this.userGuess = prompt(message);
+        }
+        this.remaining = function() {
+            return (this.limit - this.used);
+          };
+        //this.result = function() {
+        //  alert(""+ this.hoursLived);
+        //}
       }
+      var user = new Player();
+      user.initialize();
+
+      while ((user.getGuess.userGuess() != user.prediction) && (user.used < user.limit)) {//Should keep prompting while there's no match
+        console.log(user.prediction + " prediction");
+        console.log(user.limit + " guess limit");
+        console.log(user.used + " guesses used")
+        console.log(user.getGuess.userGuess() + "input guess")
+        user.used++;
+        if (user.getGuess.userGuess() < user.prediction) { //guess is lower than answer
+          user.getGuess.userGuess() = prompt("Too low, guess again...try a higher number! You have " + user.remaining() + " remaining.");
+        }
+        else {// guess is higher than the answer
+          user.getGuess.userGuess() = prompt("Too high, guess again...try a lower number. You have " + user.remaining() + " remaining.");
+        }
+      }
+      //guess and answer match
+      if (user.used < user.limit) {
+        if (user.getGuess.userGuess() > 116) {
+          this.result = ("Wow! " + user.prediction + " wins would be a record! It took you " + user.used + " tries.");
+        }
+        else if (user.getGuess.userGuess() > 95) {//guess between 96-116
+          this.result = ("Horray! You matched the predicted number of " + user.prediction + " in " + user.used + " tries. They'll be in first place for sure!");
+        }
+        else if (user.getGuess.userGuess() > 80){//guess between 81-95
+          this.result = ("Sweet! You matched this super accurate predictor with the total of " + user.prediction + " in " + user.used + " tries.");
+        }
+        else if (user.getGuess.userGuess() > 60) {//guess between 61-79
+          this.result = ("You matched the predicted number of " + user.prediction + " in " + user.used + " tries. So.. the M's are going to have another losing season.");
+        }
+        else {//guess 60 and below
+          this.result = ("You matched the predicted number of " + user.prediction + " in " + user.used + " tries. So, last place this year...");
+        }
+      }else {
+        this.result = "You LOSE! (too many attempts)";
+      }
+
+      alert(this.result);
     };
-
-    game.limit = prompt("This game asks you to match the predicted total number of wins the Mariners will achive this year. How many tries do you think it will take you to match?")
-    game.guess = prompt("Guess a number and match the predicted total number of wins the Mariners will achive this year.");
-
-    while ((game.guess != game.answer) && (game.counter < game.limit)) {//Should keep prompting while there's no match
-      if (game.guess < game.answer) { //guess is lower than answer
-        game.guess = prompt("Too low, guess again...try a higher number! You have " + game.guessremaining() + " remaining.");
-        game.counter++;
-      }
-      else {// guess is higher than the answer
-        game.guess = prompt("Too high, guess again...try a lower number. You have " + game.guessremaining() + " remaining.");
-        game.counter++;
-      }
-    }
-    //guess and answer match
-    if (game.counter < game.limit) {
-      if (game.guess > 116) {
-        game.message = "Wow! " + game.answer + " wins would be a record! It took you " + game.counter + " tries.";
-      }
-      else if (game.guess > 95) {//guess between 96-116
-        game.message = "Horray! You matched the predicted number of " + game.answer + " in " + game.counter + " tries. They'll be in first place for sure!";
-      }
-      else if (game.guess > 80){//guess between 81-95
-        game.message = "Sweet! You matched this super accurate predictor with the total of " + game.answer + " in " + game.counter + " tries.";
-      }
-      else if (game.guess > 60) {//guess between 61-79
-        game.message = "You matched the predicted number of " + game.answer + " in " + game.counter + " tries. So.. the M's are going to have another losing season.";
-      }
-      else {//guess 60 and below
-        game.message = "You matched the predicted number of " + game.answer + " in " + game.counter + " tries. So, last place this year...";
-      }
-    }else {
-      game.message = "You took too many tries. Sorry.";
-    }
-
-    alert(game.message);
-  }());
-</script>
+  </script>
+</html>
