@@ -1,94 +1,105 @@
 <!doctype html>
   <head>
     <title> Seattle Mariners Win Predictor </title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="seattle">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <h1>M's Match Game!</h1>
-      <!--for background image -->
+    <h1>"M's Match Game!"</h1>
+      <!--for background image-->
       <img src="http://images8.alphacoders.com/438/438626.jpg" alt="Mariners Logo with blue background">
-
+      <p>Can you match the predictor?</p>
     <h2>Instructions</h2>
       <figure>
-        <img src="http://mlb.mlb.com/images/2011/07/14/UeSQcgev.jpg" alt="2001 final regular season game with 116 wins in background" align="right">
-        <figcaption align="right">In 2001, the Mariners tied the MLB record with 116 wins.</figcaption>
+        <img src="http://mlb.mlb.com/images/2011/07/14/UeSQcgev.jpg" alt="2001 final
+          regular season game with 116 wins in background" title="win example">
+        <figcaption>In 2001, the Mariners tied the MLB record with 116 wins.</figcaption>
       </figure>
-      <p>This program generates a prediction for the number of wins the Seattle Mariners will have this year. Your job is to match the amount it generates.
+      <p>This program generates a prediction for the number of wins the Seattle Mariners will have this year. Your goal is to match the amount it generates.
       </p>
         <ol>
           <li>Input the number of attempts you think it will take for you to match the predictor</li>
           <li>Input your guess for the number of wins. It will inform you if you need to guess higher or lower</li>
           <li>Continue guessing until correct or you run out of tries </li>
         </ol>
-      <p>When you match the predictor's number it will give congratulatory message and tell you in how many attempts it took.
+      <p>When you match the predictor number it will give a congratulatory message and tell you in how many attempts it took.
       </p>
+    <h2>Match the Predictor!</h2>
+      <form action="">
+        <label>How many tries will it take you?<input placeholder="Enter Number Here"></label>
+        <p id="limit"></p>
+        <p id="user-guess"></p>
+        <p><label>Place Your Guess<input id="guess-input" type="text" placeholder="Here"></label>
+        </p>
+        <p id="help"></p>
+        <p id="result"></p>
+      </form>
     <h2>Other Information</h2>
-      <p><strong>High Scores</strong>
-      </p>
-      <a href="http://seattle.mariners.mlb.com/mlb/standings/" target="_blank">Current MLB standings</a>
-      <a href="">Reviews</a>
-      <p>Issues?:
-        <a href="mailto:michael.tse3@gmail.com">E-mail Mike</a>
+      <p>
+        <ul>
+          <li><a href="http://seattle.mariners.mlb.com/mlb/standings/" target="_blank">Current MLB standings</a></li>
+          <li>Issues?:<a href="mailto:michael.tse3@gmail.com">E-mail Mike</a></li>
+        </ul>
+        <a href="http://seattle.mariners.mlb.com/index.jsp?c_id=sea">
+          <img src="http://upload.wikimedia.org/wikipedia/en/8/8a/Seattle_Mariners_Insignia.svg" alt="Seattle Mariners Logo" />
+        </a>
       </p>
   </body>
   <script type="text/javascript">
     window.onload = function () {//displays pictures first, then runs game
       var Player = function () {
-        this.initialize = function() {
-          this.prediction = Math.floor(Math.random() * 162) + 1;
-          /*Generates random number between 1 - 162 to be set as answer*/
-          this.limit = prompt("This game will ask you to match the predicted total number of wins the Mariners will achive this year. How many tries do you think it will take you to match?");
-          this.getGuess("Guess the total number of wins the Mariners will achive this year.");
-          this.used = 1;
-          this.result = "";
-        }
-        this.getGuess = function(message) {
-          this.userGuess = prompt(message);
-        }
-        this.remaining = function() {
-            return (this.limit - this.used);
-          };
-        //this.result = function() {
-        //  alert(""+ this.hoursLived);
-        //}
+      this.initialize = function() {
+        this.prediction = Math.floor(Math.random() * 162) + 1;
+        /*Generates random number between 1 - 162 to be set as answer*/
+        this.limit = prompt("This game will ask you to match the predicted total number of wins the Mariners will achive this year. How many tries do you think it will take you to match?");
+        this.userGuess = prompt("Guess the total number of wins the Mariners will achive this year.");
+        this.counter = 1;
+        this.ending = "";
       }
-      var user = new Player();
-      user.initialize();
+      this.guessRemaining = function() {
+        return (this.limit - this.counter);
+      };
+    }
+    var game = new Player();
+    game.initialize();
 
-      while ((user.getGuess.userGuess() != user.prediction) && (user.used < user.limit)) {//Should keep prompting while there's no match
-        console.log(user.prediction + " prediction");
-        console.log(user.limit + " guess limit");
-        console.log(user.used + " guesses used")
-        console.log(user.getGuess.userGuess() + "input guess")
-        user.used++;
-        if (user.getGuess.userGuess() < user.prediction) { //guess is lower than answer
-          user.getGuess.userGuess() = prompt("Too low, guess again...try a higher number! You have " + user.remaining() + " remaining.");
-        }
-        else {// guess is higher than the answer
-          user.getGuess.userGuess() = prompt("Too high, guess again...try a lower number. You have " + user.remaining() + " remaining.");
-        }
+    console.log (game.prediction);
+    while ((game.userGuess != game.prediction) && (game.counter < game.limit)) {//Should keep prompting while there's no match
+      if (game.userGuess < game.prediction) { //guess is lower than answer
+        game.userGuess = prompt("Too low, guess again...try a higher number! You have " + game.guessRemaining() +" remaining.");
+        game.counter++;
       }
-      //guess and answer match
-      if (user.used < user.limit) {
-        if (user.getGuess.userGuess() > 116) {
-          this.result = ("Wow! " + user.prediction + " wins would be a record! It took you " + user.used + " tries.");
-        }
-        else if (user.getGuess.userGuess() > 95) {//guess between 96-116
-          this.result = ("Horray! You matched the predicted number of " + user.prediction + " in " + user.used + " tries. They'll be in first place for sure!");
-        }
-        else if (user.getGuess.userGuess() > 80){//guess between 81-95
-          this.result = ("Sweet! You matched this super accurate predictor with the total of " + user.prediction + " in " + user.used + " tries.");
-        }
-        else if (user.getGuess.userGuess() > 60) {//guess between 61-79
-          this.result = ("You matched the predicted number of " + user.prediction + " in " + user.used + " tries. So.. the M's are going to have another losing season.");
-        }
-        else {//guess 60 and below
-          this.result = ("You matched the predicted number of " + user.prediction + " in " + user.used + " tries. So, last place this year...");
-        }
-      }else {
-        this.result = "You LOSE! (too many attempts)";
+      else {// guess is higher than the answer
+        game.userGuess = prompt("Too high, guess again...try a lower number. You have " + game.guessRemaining() +" remaining.");
+        game.counter++;
       }
-
-      alert(this.result);
+    }
+    //guess and answer match
+    if (game.counter < game.limit) {
+      console.log (game.prediction);
+      if (game.userGuess > 116) {
+        game.ending = "Wow! " + game.prediction + " wins would be a record! It took you " + game.counter + " tries.";
+      }
+      else if (game.userGuess > 95) {//guess between 96-116
+        game.ending = "Horray! You matched the predicted number of " + game.prediction + " in " + game.counter + " tries. They'll be in first place for sure!";
+      }
+      else if (game.userGuess > 80){//guess between 81-95
+        game.ending = "Sweet! You matched this super accurate predictor with the total of " + game.prediction + " in " + game.counter + " tries.";
+      }
+      else if (game.userGuess > 60) {//guess between 61-79
+        game.ending = "You matched the predicted number of " + game.prediction + " in " + game.counter + " tries. So.. the M's are going to have another losing season.";
+      }
+      else {//guess 60 and below
+        game.ending = "You matched the predicted number of " + game.prediction + " in " + game.counter + " tries. So, last place this year...";
+      }
+    }else {
+      game.ending = "You took too many tries. Sorry, " + game.prediction + " was the predicted number of wins. Pretty accurate right?"
+    }
+    var result = document.getElementById('result');//grabs id "result" items
+    result.textContent = game.ending;//places message in result location
     };
   </script>
 </html>
